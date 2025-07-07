@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { Upload, Type } from 'lucide-react'
-import { EMBROIDERY_PLACEMENTS, THREAD_COLORS, FONTS, LOGO_SIZES, CartItem } from '@/lib/types'
+import { THREAD_COLORS, FONTS, LOGO_SIZES, CartItem } from '@/lib/types'
+import { products } from '@/data/products'
 
 interface CustomizationPanelProps {
   item: Partial<CartItem>
@@ -56,6 +57,14 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
     })
   }
 
+  const handleFontChange = (font: string) => {
+    setSelectedFont(font)
+    onItemChange({
+      ...item,
+      embroideryFont: font,
+    })
+  }
+
   const handlePlacementChange = (placement: string) => {
     onItemChange({
       ...item,
@@ -81,6 +90,15 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
       quantity,
       totalPrice: (item.pricePerItem || 0) * quantity,
     })
+  }
+
+  const getAvailablePlacements = () => {
+    if (!item.productId) return []
+    
+    const productData = products.find(p => p.id === item.productId)
+    if (!productData) return []
+    
+    return productData.embroideryAreas?.map(area => area.name) || []
   }
 
   return (
@@ -134,7 +152,7 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
             <label className="form-label">Font</label>
             <select
               value={selectedFont}
-              onChange={(e) => setSelectedFont(e.target.value)}
+              onChange={(e) => handleFontChange(e.target.value)}
               className="form-input"
             >
               {FONTS.map((font) => (
@@ -209,7 +227,7 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
       <div className="mb-6">
         <label className="form-label">Embroidery Placement</label>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-          {EMBROIDERY_PLACEMENTS.map((placement) => (
+          {getAvailablePlacements().map((placement) => (
             <button
               key={placement}
               onClick={() => handlePlacementChange(placement)}
@@ -223,6 +241,11 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
             </button>
           ))}
         </div>
+        {getAvailablePlacements().length === 0 && (
+          <p className="text-sm text-gray-500 mt-2">
+            Select a product first to see available placement options
+          </p>
+        )}
       </div>
 
       {/* Thread Colors */}

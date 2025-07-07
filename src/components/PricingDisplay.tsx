@@ -3,6 +3,7 @@
 import { useEffect, useCallback } from 'react'
 import { CartItem } from '@/lib/types'
 import { formatPrice } from '@/lib/stripe'
+import { products } from '@/data/products'
 
 interface PricingDisplayProps {
   item: Partial<CartItem>
@@ -12,8 +13,11 @@ interface PricingDisplayProps {
 
 export default function PricingDisplay({ item, onAddToCart, onItemChange }: PricingDisplayProps) {
   const calculatePricing = useCallback(() => {
-    const basePrice = item.pricePerItem || 0
+    // Get base price from product data, not from item state to avoid corruption
+    const productData = products.find((p) => p.id === item.productId)
+    const basePrice = productData?.basePrice || 0
     const quantity = item.quantity || 1
+    
     
     // Embroidery costs
     let embroideryPrice = 0
@@ -65,7 +69,7 @@ export default function PricingDisplay({ item, onAddToCart, onItemChange }: Pric
       itemTotal,
       finalTotal: subtotal
     }
-  }, [item.pricePerItem, item.quantity, item.embroideryText, item.embroideryDesign, item.logoSize, item.threadColors, item.size])
+  }, [item.productId, item.quantity, item.embroideryText, item.embroideryDesign, item.logoSize, item.threadColors, item.size, item.pricePerItem])
 
   // Update pricing when relevant data changes - but avoid circular updates
   useEffect(() => {

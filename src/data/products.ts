@@ -41,7 +41,7 @@ export const products: Product[] = [
       'Embroidery-ready'
     ],
     image: productImages.tshirt,
-    colors: ['White', 'Black', 'Navy', 'Red', 'Royal Blue', 'Forest Green', 'Gray', 'Charcoal'],
+    colors: ['White', 'Black', 'Navy', 'Red', 'Royal Blue', 'Gray'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     embroideryAreas: [
       { name: 'Left Chest', maxWidth: 4, maxHeight: 4, position: 'left-chest' },
@@ -75,7 +75,7 @@ export const products: Product[] = [
       'One Size Fits Most'
     ],
     image: productImages.cap,
-    colors: ['Navy', 'Black', 'White', 'Red', 'Royal Blue', 'Khaki', 'Charcoal'],
+    colors: ['Navy', 'Black', 'White', 'Red', 'Royal Blue', 'Khaki'],
     sizes: ['One Size'],
     embroideryAreas: [
       { name: 'Front Panel', maxWidth: 4, maxHeight: 2.5, position: 'front-panel' },
@@ -107,7 +107,7 @@ export const products: Product[] = [
       'Machine Washable'
     ],
     image: productImages.hoodie,
-    colors: ['Charcoal', 'Black', 'Navy', 'Gray', 'Maroon', 'Forest Green'],
+    colors: ['Charcoal', 'Black', 'Navy', 'Gray', 'Maroon', 'Red'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     embroideryAreas: [
       { name: 'Left Chest', maxWidth: 4, maxHeight: 4, position: 'left-chest' },
@@ -140,7 +140,7 @@ export const products: Product[] = [
       'Professional Appearance'
     ],
     image: productImages.polo,
-    colors: ['Navy', 'White', 'Black', 'Royal Blue', 'Red', 'Forest Green', 'Gray'],
+    colors: ['Navy', 'White', 'Black', 'Royal Blue', 'Red', 'Gray'],
     sizes: ['S', 'M', 'L', 'XL', '2XL', '3XL'],
     embroideryAreas: [
       { name: 'Left Chest', maxWidth: 4, maxHeight: 4, position: 'left-chest' },

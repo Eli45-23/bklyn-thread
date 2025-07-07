@@ -20,6 +20,7 @@ export interface CartItem {
   embroideryText?: string
   embroideryDesign?: string | null
   embroideryPlacement: string
+  embroideryFont?: string
   threadColors: string[]
   pricePerItem: number
   totalPrice: number
