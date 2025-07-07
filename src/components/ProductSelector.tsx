@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import Image from 'next/image'
 import { CartItem } from '@/lib/types'
 import { products } from '@/data/products'
 
@@ -72,7 +73,7 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
             }`}
           >
             <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2 overflow-hidden">
-              <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded" />
+              <Image src={product.image} alt={product.name} className="w-full h-full object-cover rounded" width={150} height={150} />
             </div>
             <h3 className="font-medium text-sm text-gray-900">
               {product.name}

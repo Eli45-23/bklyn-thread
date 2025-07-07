@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Star, Clock, Shield, ShoppingCart, CheckCircle } from 'lucide-react'
 import { products } from '@/data/products'
@@ -137,7 +138,7 @@ export default function DemoPage() {
                       className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all hover:shadow-md"
                     >
                       <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2 overflow-hidden">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded" />
+                        <Image src={product.image} alt={product.name} className="w-full h-full object-cover rounded" width={200} height={200} />
                       </div>
                       <h3 className="font-medium text-gray-900">{product.name}</h3>
                       <p className="text-blue-600 font-semibold">${product.price.toFixed(2)}</p>
@@ -350,10 +351,12 @@ export default function DemoPage() {
               <div className="card">
                 <h3 className="text-lg font-semibold mb-4">Product Preview</h3>
                 <div className="aspect-square bg-gray-50 rounded-lg flex items-center justify-center p-4 mb-4 overflow-hidden">
-                  <img 
-                    src={demoProducts.find(p => p.id === demoData.product)?.image} 
-                    alt={demoProducts.find(p => p.id === demoData.product)?.name}
+                  <Image 
+                    src={demoProducts.find(p => p.id === demoData.product)?.image || ''} 
+                    alt={demoProducts.find(p => p.id === demoData.product)?.name || ''}
                     className="w-full h-full object-cover rounded-lg shadow-sm" 
+                    width={300}
+                    height={300}
                   />
                 </div>
                 <div className="space-y-2 text-sm">

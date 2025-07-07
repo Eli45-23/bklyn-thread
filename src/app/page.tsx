@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { ArrowRight, Star, Truck, Clock, Shield } from 'lucide-react'
 import { products } from '@/data/products'
 
@@ -109,10 +110,12 @@ export default function Home() {
             {products.map((product) => (
               <Link key={product.id} href="/customize" className="product-card overflow-hidden group hover:scale-105 transition-all duration-300">
                 <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 overflow-hidden">
-                  <img 
+                  <Image 
                     src={product.image} 
                     alt={product.name} 
                     className="w-full h-full object-cover rounded-lg shadow-sm group-hover:shadow-lg transition-shadow duration-300" 
+                    width={300}
+                    height={300}
                   />
                 </div>
                 <div className="p-4">
