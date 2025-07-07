@@ -4,7 +4,6 @@ import { Trash2, Plus, Minus, ArrowLeft } from 'lucide-react'
 import Link from 'next/link'
 import { formatPrice } from '@/lib/stripe'
 import { useCart } from '@/contexts/CartContext'
-import Header from '@/components/Header'
 
 export default function CartPage() {
   const { state, dispatch } = useCart()
@@ -27,9 +26,28 @@ export default function CartPage() {
   const total = subtotal + tax + shipping
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <Header />
-      <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">BT</span>
+              </div>
+              <h1 className="text-xl font-bold text-gray-900">BKLYN Thread</h1>
+            </div>
+            <nav className="hidden md:flex space-x-6">
+              <Link href="/" className="text-gray-600 hover:text-blue-600">Home</Link>
+              <Link href="/customize" className="text-gray-600 hover:text-blue-600">Customize</Link>
+              <Link href="/faq" className="text-gray-600 hover:text-blue-600">FAQ</Link>
+              <Link href="/contact" className="text-gray-600 hover:text-blue-600">Contact</Link>
+            </nav>
+          </div>
+        </div>
+      </header>
+
+      <div className="max-w-6xl mx-auto px-4 py-8">
         <div className="flex items-center mb-8">
           <Link href="/customize" className="flex items-center text-blue-600 hover:text-blue-700 mr-4">
             <ArrowLeft size={20} className="mr-1" />
