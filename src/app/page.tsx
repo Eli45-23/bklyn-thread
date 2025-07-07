@@ -1,103 +1,210 @@
-import Image from "next/image";
+import Link from 'next/link'
+import { ArrowRight, Star, Truck, Clock, Shield } from 'lucide-react'
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+      {/* Header */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">BT</span>
+              </div>
+              <h1 className="text-xl font-bold text-gray-900">BKLYN Thread</h1>
+            </div>
+            <nav className="hidden md:flex space-x-6">
+              <Link href="/customize" className="text-gray-600 hover:text-blue-600">
+                Customize
+              </Link>
+              <Link href="/faq" className="text-gray-600 hover:text-blue-600">
+                FAQ
+              </Link>
+              <Link href="/contact" className="text-gray-600 hover:text-blue-600">
+                Contact
+              </Link>
+              <Link href="/cart" className="text-gray-600 hover:text-blue-600">
+                Cart
+              </Link>
+            </nav>
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-5xl font-bold text-gray-900 mb-6">
+            BKLYN Thread Custom Embroidery
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+            Brooklyn&apos;s premier custom embroidery service. Create stunning embroidered apparel with our easy-to-use design tool. 
+            Professional quality, competitive pricing, and fast turnaround.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/customize" className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2">
+              <span>Start Designing</span>
+              <ArrowRight size={20} />
+            </Link>
+            <Link href="/faq" className="btn-secondary text-lg px-8 py-4">
+              Learn More
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Why Choose BKLYN Thread?
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Star className="text-blue-600" size={32} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Premium Quality
+              </h3>
+              <p className="text-gray-600">
+                Professional-grade embroidery with high-quality threads and precision stitching.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Clock className="text-green-600" size={32} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Fast Turnaround
+              </h3>
+              <p className="text-gray-600">
+                Most orders completed in 5-7 business days with express options available.
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Shield className="text-purple-600" size={32} />
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Satisfaction Guaranteed
+              </h3>
+              <p className="text-gray-600">
+                We stand behind our work with a 100% satisfaction guarantee.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Showcase */}
+      <section className="py-16 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Popular Products
+          </h2>
+          <div className="grid md:grid-cols-4 gap-6">
+            {[
+              { name: 'T-Shirts', price: '$15.99', image: '/images/tshirt.jpg' },
+              { name: 'Baseball Caps', price: '$19.99', image: '/images/cap.jpg' },
+              { name: 'Hoodies', price: '$39.99', image: '/images/hoodie.jpg' },
+              { name: 'Polo Shirts', price: '$24.99', image: '/images/polo.jpg' }
+            ].map((product, index) => (
+              <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="aspect-square bg-gray-200 flex items-center justify-center">
+                  <span className="text-gray-500 text-sm">{product.name}</span>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-gray-900">{product.name}</h3>
+                  <p className="text-gray-600">Starting at {product.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
+      <section className="py-16 px-4 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            How It Works
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { step: '1', title: 'Choose Product', desc: 'Select from shirts, hats, hoodies, and more' },
+              { step: '2', title: 'Design', desc: 'Upload your design or add custom text' },
+              { step: '3', title: 'Customize', desc: 'Pick colors, placement, and quantity' },
+              { step: '4', title: 'Order', desc: 'Secure checkout and fast delivery' }
+            ].map((item, index) => (
+              <div key={index} className="text-center">
+                <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-lg font-bold">
+                  {item.step}
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 px-4 bg-blue-600 text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-4">
+            Ready to Create Your Custom Embroidery?
+          </h2>
+          <p className="text-xl mb-8 opacity-90">
+            Join thousands of satisfied customers who trust us with their custom embroidery needs.
+          </p>
+          <Link href="/customize" className="bg-white text-blue-600 hover:bg-gray-100 font-medium py-3 px-8 rounded-lg inline-flex items-center space-x-2 transition-colors">
+            <span>Start Your Design</span>
+            <ArrowRight size={20} />
+          </Link>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-lg font-semibold mb-4">BKLYN Thread</h3>
+              <p className="text-gray-400">
+                Brooklyn&apos;s premier custom embroidery service for all your apparel needs.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link href="/customize" className="hover:text-white">Customize</Link></li>
+                <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>
+                <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li>Phone: (555) 123-4567</li>
+                <li>Email: info@bklynthread.com</li>
+                <li>Hours: Mon-Fri 9AM-6PM</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Guarantee</h4>
+              <div className="flex items-center space-x-2 text-gray-400">
+                <Truck size={16} />
+                <span>Free shipping over $50</span>
+              </div>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 BKLYN Thread. All rights reserved.</p>
+          </div>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
