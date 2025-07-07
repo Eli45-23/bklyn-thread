@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  basePath: '/bklyn-thread',
-  assetPrefix: '/bklyn-thread/',
+  // Remove static export settings for Render deployment
+  // Render supports full Next.js features including SSR and API routes
   images: {
-    unoptimized: true
+    unoptimized: true // Keep this for now until we set up proper image optimization
   },
-  distDir: 'out'
+  // Enable environment-specific configuration
+  env: {
+    DEPLOYMENT_ENV: process.env.NODE_ENV
+  }
 };
 
 module.exports = nextConfig;
