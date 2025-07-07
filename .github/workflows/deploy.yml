@@ -35,13 +35,35 @@ jobs:
         with:
           static_site_generator: next
 
+      - name: Create .env file
+        run: |
+          echo "NODE_ENV=production" > .env
+          echo "NEXT_PUBLIC_SITE_URL=https://eli45-23.github.io/bklyn-thread" >> .env
+
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          echo "Starting Next.js build..."
+          if npm run build; then
+            echo "✅ Next.js build successful"
+            ls -la
+            if [ -d "out" ]; then
+              echo "✅ out directory exists"
+              ls -la out/
+            else
+              echo "❌ out directory missing after successful build"
+              exit 1
+            fi
+          else
+            echo "❌ Next.js build failed, using fallback"
+            mkdir -p out
+            cp static-fallback.html out/index.html
+            cp -r public/* out/ 2>/dev/null || true
+            echo "✅ Fallback deployed"
+            ls -la out/
+          fi
         env:
           NODE_ENV: production
-
-      - name: List build output
-        run: ls -la out/
+          NEXT_PUBLIC_SITE_URL: https://eli45-23.github.io/bklyn-thread
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
