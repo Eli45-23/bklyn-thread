@@ -1,0 +1,31 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shirtGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- T-shirt outline -->
+  <path d="M80 120 L80 100 Q80 80 100 80 L120 80 Q140 60 160 60 L240 60 Q260 60 280 80 L300 80 Q320 80 320 100 L320 120 L350 140 L350 180 L320 160 L320 350 Q320 370 300 370 L100 370 Q80 370 80 350 L80 160 L50 180 L50 140 Z" 
+        fill="url(#shirtGradient)" 
+        stroke="#dee2e6" 
+        stroke-width="2"/>
+  
+  <!-- Neck opening -->
+  <path d="M160 60 Q200 80 240 60" 
+        fill="none" 
+        stroke="#dee2e6" 
+        stroke-width="2"/>
+  
+  <!-- Subtle shading -->
+  <path d="M80 120 L80 350 Q80 370 100 370 L300 370 Q320 370 320 350 L320 160" 
+        fill="none" 
+        stroke="#ced4da" 
+        stroke-width="1" 
+        opacity="0.5"/>
+  
+  <!-- Text label -->
+  <text x="200" y="200" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6c757d">Premium T-Shirt</text>
+  <text x="200" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#adb5bd">100% Cotton</text>
+</svg>

@@ -1,0 +1,42 @@
+<svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="poloGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e3a8a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Polo shirt body -->
+  <path d="M80 120 L80 100 Q80 80 100 80 L120 80 Q140 60 160 60 L240 60 Q260 60 280 80 L300 80 Q320 80 320 100 L320 120 L350 140 L350 180 L320 160 L320 340 Q320 360 300 360 L100 360 Q80 360 80 340 L80 160 L50 180 L50 140 Z" 
+        fill="url(#poloGradient)" 
+        stroke="#1e3a8a" 
+        stroke-width="2"/>
+  
+  <!-- Collar -->
+  <path d="M160 60 L170 50 L230 50 L240 60 Q200 70 160 60 Z" 
+        fill="url(#poloGradient)" 
+        stroke="#1e3a8a" 
+        stroke-width="2"/>
+  
+  <!-- Placket -->
+  <path d="M190 60 L190 120 Q195 125 200 120 Q205 125 210 120 L210 60" 
+        fill="none" 
+        stroke="#1e3a8a" 
+        stroke-width="2"/>
+  
+  <!-- Buttons -->
+  <circle cx="200" cy="80" r="4" fill="#1e3a8a" stroke="#1e40af" stroke-width="1"/>
+  <circle cx="200" cy="100" r="4" fill="#1e3a8a" stroke="#1e40af" stroke-width="1"/>
+  <circle cx="200" cy="120" r="4" fill="#1e3a8a" stroke="#1e40af" stroke-width="1"/>
+  
+  <!-- Sleeve cuffs -->
+  <path d="M50 140 L50 160" stroke="#1e3a8a" stroke-width="4"/>
+  <path d="M350 140 L350 160" stroke="#1e3a8a" stroke-width="4"/>
+  
+  <!-- Bottom hem -->
+  <path d="M80 340 L320 340" stroke="#1e3a8a" stroke-width="3"/>
+  
+  <!-- Text label -->
+  <text x="200" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#6c757d">Polo Shirt</text>
+  <text x="200" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#adb5bd">Pique Cotton</text>
+</svg>
