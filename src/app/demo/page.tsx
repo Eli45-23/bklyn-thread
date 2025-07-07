@@ -17,22 +17,30 @@ export default function DemoPage() {
   })
 
   const products = [
-    { id: 'shirt', name: 'Premium T-Shirt', price: 15.99 },
-    { id: 'hat', name: 'Baseball Cap', price: 19.99 },
-    { id: 'hoodie', name: 'Pullover Hoodie', price: 39.99 },
-    { id: 'polo', name: 'Polo Shirt', price: 24.99 }
+    { id: 'shirt', name: 'Premium T-Shirt', price: 18.99, image: '/images/products/tshirt-white.svg' },
+    { id: 'hat', name: 'Baseball Cap', price: 22.99, image: '/images/products/baseball-cap.svg' },
+    { id: 'hoodie', name: 'Pullover Hoodie', price: 44.99, image: '/images/products/hoodie-gray.svg' },
+    { id: 'polo', name: 'Polo Shirt', price: 28.99, image: '/images/products/polo-navy.svg' }
   ]
 
   const calculatePrice = () => {
     const product = products.find(p => p.id === demoData.product)
     if (!product) return 0
     
-    let total = product.price
-    if (demoData.design === 'logo') total += 5 // Logo embroidery
-    if (demoData.design === 'text') total += 3 // Text embroidery
-    if (demoData.quantity >= 10) total *= 0.95 // 5% discount
+    let itemPrice = product.price
     
-    return total * demoData.quantity
+    // Embroidery costs
+    if (demoData.design === 'logo') itemPrice += 12.00 // Logo embroidery
+    if (demoData.design === 'text') itemPrice += 8.00 // Text embroidery
+    
+    let total = itemPrice * demoData.quantity
+    
+    // Volume discounts
+    if (demoData.quantity >= 50) total *= 0.85 // 15% discount
+    else if (demoData.quantity >= 25) total *= 0.90 // 10% discount  
+    else if (demoData.quantity >= 10) total *= 0.95 // 5% discount
+    
+    return total
   }
 
   const nextStep = () => {
@@ -117,10 +125,8 @@ export default function DemoPage() {
                       }}
                       className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all"
                     >
-                      <div className="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
-                        <span className="text-xs text-gray-500">
-                          {product.name.toUpperCase()}
-                        </span>
+                      <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2">
+                        <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
                       </div>
                       <h3 className="font-medium">{product.name}</h3>
                       <p className="text-blue-600">${product.price}</p>
@@ -190,8 +196,9 @@ export default function DemoPage() {
                     }}
                     className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 text-left"
                   >
-                    <h3 className="font-medium mb-2">Custom Text</h3>
-                    <p className="text-gray-600 text-sm">Add custom text embroidery (+$3.00)</p>
+                    <h3 className="font-medium mb-2">Custom Text Embroidery</h3>
+                    <p className="text-gray-600 text-sm">Add custom text embroidery (+$8.00)</p>
+                    <p className="text-xs text-blue-600">Up to 15 characters, multiple thread colors</p>
                   </button>
                   <button
                     onClick={() => {
@@ -200,8 +207,9 @@ export default function DemoPage() {
                     }}
                     className="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 text-left"
                   >
-                    <h3 className="font-medium mb-2">Upload Logo</h3>
-                    <p className="text-gray-600 text-sm">Upload your logo design (+$5.00)</p>
+                    <h3 className="font-medium mb-2">Logo Embroidery</h3>
+                    <p className="text-gray-600 text-sm">Upload your logo design (+$12.00)</p>
+                    <p className="text-xs text-blue-600">Vector files preferred, up to 4" wide</p>
                   </button>
                 </div>
               </div>
@@ -259,9 +267,22 @@ export default function DemoPage() {
                       </button>
                     ))}
                   </div>
-                  {demoData.quantity >= 10 && (
-                    <div className="p-3 bg-green-50 rounded-lg">
-                      <p className="text-green-700 text-sm">🎉 5% quantity discount applied!</p>
+                  {demoData.quantity >= 50 && (
+                    <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-green-700 text-sm font-medium">🎉 15% Volume Discount Applied!</p>
+                      <p className="text-green-600 text-xs">Orders 50+ units save significantly</p>
+                    </div>
+                  )}
+                  {demoData.quantity >= 25 && demoData.quantity < 50 && (
+                    <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-green-700 text-sm font-medium">🎉 10% Volume Discount Applied!</p>
+                      <p className="text-green-600 text-xs">Order 25 more for additional savings</p>
+                    </div>
+                  )}
+                  {demoData.quantity >= 10 && demoData.quantity < 25 && (
+                    <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-green-700 text-sm font-medium">🎉 5% Volume Discount Applied!</p>
+                      <p className="text-green-600 text-xs">Order 15 more for 10% discount</p>
                     </div>
                   )}
                   <button onClick={nextStep} className="btn-primary">
@@ -304,8 +325,52 @@ export default function DemoPage() {
             )}
           </div>
 
-          {/* Sidebar - Order Summary */}
+          {/* Sidebar - Product Preview & Order Summary */}
           <div className="space-y-6">
+            {/* Product Preview */}
+            {demoData.product && (
+              <div className="card">
+                <h3 className="text-lg font-semibold mb-4">Product Preview</h3>
+                <div className="aspect-square bg-gray-50 rounded-lg flex items-center justify-center p-4 mb-4">
+                  <img 
+                    src={products.find(p => p.id === demoData.product)?.image} 
+                    alt={products.find(p => p.id === demoData.product)?.name}
+                    className="w-full h-full object-contain" 
+                  />
+                </div>
+                <div className="space-y-2 text-sm">
+                  {demoData.color && (
+                    <div className="flex items-center justify-between">
+                      <span>Color:</span>
+                      <div className="flex items-center space-x-2">
+                        <div className={`w-4 h-4 rounded-full border ${
+                          demoData.color === 'White' ? 'bg-white border-gray-300' :
+                          demoData.color === 'Black' ? 'bg-black' :
+                          demoData.color === 'Navy' ? 'bg-blue-900' :
+                          demoData.color === 'Red' ? 'bg-red-600' :
+                          demoData.color === 'Royal Blue' ? 'bg-blue-600' :
+                          demoData.color === 'Forest Green' ? 'bg-green-700' :
+                          demoData.color === 'Gray' ? 'bg-gray-500' :
+                          demoData.color === 'Charcoal' ? 'bg-gray-800' : 'bg-gray-300'
+                        }`} />
+                        <span>{demoData.color}</span>
+                      </div>
+                    </div>
+                  )}
+                  {demoData.design && (
+                    <div className="p-2 bg-blue-50 rounded border border-blue-200">
+                      <p className="text-blue-700 font-medium">
+                        {demoData.design === 'text' ? '📝 Custom Text' : '🎨 Logo Design'}
+                      </p>
+                      <p className="text-blue-600 text-xs">
+                        {demoData.placement && `Placement: ${demoData.placement}`}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
             <div className="card">
               <h3 className="text-lg font-semibold mb-4">Order Summary</h3>
               <div className="space-y-2 text-sm">
@@ -333,12 +398,30 @@ export default function DemoPage() {
                   <span>Quantity:</span>
                   <span>{demoData.quantity}</span>
                 </div>
-                <div className="border-t pt-2 mt-2">
-                  <div className="flex justify-between font-semibold text-lg">
-                    <span>Total:</span>
-                    <span>${calculatePrice().toFixed(2)}</span>
+                {demoData.product && (
+                  <div className="border-t pt-2 mt-2 space-y-1">
+                    <div className="flex justify-between text-sm">
+                      <span>Base Price:</span>
+                      <span>${(products.find(p => p.id === demoData.product)?.price || 0).toFixed(2)} × {demoData.quantity}</span>
+                    </div>
+                    {demoData.design && (
+                      <div className="flex justify-between text-sm">
+                        <span>Embroidery:</span>
+                        <span>+${(demoData.design === 'logo' ? 12.00 : 8.00).toFixed(2)} × {demoData.quantity}</span>
+                      </div>
+                    )}
+                    {demoData.quantity >= 10 && (
+                      <div className="flex justify-between text-sm text-green-600">
+                        <span>Volume Discount:</span>
+                        <span>-{demoData.quantity >= 50 ? '15' : demoData.quantity >= 25 ? '10' : '5'}%</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between font-semibold text-lg border-t pt-2">
+                      <span>Total:</span>
+                      <span>${calculatePrice().toFixed(2)}</span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
 

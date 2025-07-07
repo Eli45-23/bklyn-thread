@@ -79,22 +79,22 @@ export default function CustomizePage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
       <Header />
       
       {/* Success Message */}
       {showSuccess && (
-        <div className="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg z-50">
+        <div className="fixed top-4 right-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white px-6 py-3 rounded-xl shadow-lg z-50 transform transition-all duration-300">
           ✅ Item added to cart successfully!
         </div>
       )}
       
       <div className="max-w-7xl mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+        <div className="mb-8 text-center">
+          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 bg-clip-text text-transparent mb-4">
             Customize Your Order
           </h1>
-          <p className="text-gray-600">
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Design your perfect embroidered apparel with our easy-to-use customization tool
           </p>
         </div>

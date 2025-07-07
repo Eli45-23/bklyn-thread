@@ -9,10 +9,10 @@ interface ProductSelectorProps {
 }
 
 const products = [
-  { id: '1', name: 'Premium T-Shirt', type: 'shirt', basePrice: 15.99, image: '/shirts/tshirt.jpg' },
-  { id: '2', name: 'Baseball Cap', type: 'hat', basePrice: 19.99, image: '/hats/baseball.jpg' },
-  { id: '3', name: 'Pullover Hoodie', type: 'hoodie', basePrice: 39.99, image: '/hoodies/pullover.jpg' },
-  { id: '4', name: 'Polo Shirt', type: 'polo', basePrice: 24.99, image: '/shirts/polo.jpg' },
+  { id: '1', name: 'Premium T-Shirt', type: 'shirt', basePrice: 18.99, image: '/images/products/tshirt-white.svg' },
+  { id: '2', name: 'Baseball Cap', type: 'hat', basePrice: 22.99, image: '/images/products/baseball-cap.svg' },
+  { id: '3', name: 'Pullover Hoodie', type: 'hoodie', basePrice: 44.99, image: '/images/products/hoodie-gray.svg' },
+  { id: '4', name: 'Polo Shirt', type: 'polo', basePrice: 28.99, image: '/images/products/polo-navy.svg' },
 ]
 
 export default function ProductSelector({ selectedProduct, onProductChange }: ProductSelectorProps) {
@@ -75,10 +75,8 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
-              <span className="text-xs text-gray-500">
-                {product.type.toUpperCase()}
-              </span>
+            <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2">
+              <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
             </div>
             <h3 className="font-medium text-sm text-gray-900">
               {product.name}
