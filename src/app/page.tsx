@@ -201,7 +201,7 @@ export default function Home() {
                     <Star key={i} size={16} className="text-yellow-500 fill-current" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4 italic">"{testimonial.review}"</p>
+                <p className="text-gray-600 mb-4 italic">&quot;{testimonial.review}&quot;</p>
                 <div className="pricing-highlight">
                   {testimonial.order}
                 </div>

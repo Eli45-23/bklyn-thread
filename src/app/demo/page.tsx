@@ -209,7 +209,7 @@ export default function DemoPage() {
                   >
                     <h3 className="font-medium mb-2">Logo Embroidery</h3>
                     <p className="text-gray-600 text-sm">Upload your logo design (+$12.00)</p>
-                    <p className="text-xs text-blue-600">Vector files preferred, up to 4" wide</p>
+                    <p className="text-xs text-blue-600">Vector files preferred, up to 4&quot; wide</p>
                   </button>
                 </div>
               </div>
