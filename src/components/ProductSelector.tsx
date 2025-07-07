@@ -9,10 +9,10 @@ interface ProductSelectorProps {
 }
 
 const products = [
-  { id: '1', name: 'Premium T-Shirt', type: 'shirt', basePrice: 18.99, image: '/images/products/tshirt-white.svg' },
-  { id: '2', name: 'Baseball Cap', type: 'hat', basePrice: 22.99, image: '/images/products/baseball-cap.svg' },
-  { id: '3', name: 'Pullover Hoodie', type: 'hoodie', basePrice: 44.99, image: '/images/products/hoodie-gray.svg' },
-  { id: '4', name: 'Polo Shirt', type: 'polo', basePrice: 28.99, image: '/images/products/polo-navy.svg' },
+  { id: '1', name: 'Premium T-Shirt', type: 'shirt', basePrice: 18.99, image: '/bklyn-thread/images/products/tshirt-white.svg' },
+  { id: '2', name: 'Baseball Cap', type: 'hat', basePrice: 22.99, image: '/bklyn-thread/images/products/baseball-cap.svg' },
+  { id: '3', name: 'Pullover Hoodie', type: 'hoodie', basePrice: 44.99, image: '/bklyn-thread/images/products/hoodie-gray.svg' },
+  { id: '4', name: 'Polo Shirt', type: 'polo', basePrice: 28.99, image: '/bklyn-thread/images/products/polo-navy.svg' },
 ]
 
 export default function ProductSelector({ selectedProduct, onProductChange }: ProductSelectorProps) {

@@ -17,10 +17,10 @@ export default function DemoPage() {
   })
 
   const products = [
-    { id: 'shirt', name: 'Premium T-Shirt', price: 18.99, image: '/images/products/tshirt-white.svg' },
-    { id: 'hat', name: 'Baseball Cap', price: 22.99, image: '/images/products/baseball-cap.svg' },
-    { id: 'hoodie', name: 'Pullover Hoodie', price: 44.99, image: '/images/products/hoodie-gray.svg' },
-    { id: 'polo', name: 'Polo Shirt', price: 28.99, image: '/images/products/polo-navy.svg' }
+    { id: 'shirt', name: 'Premium T-Shirt', price: 18.99, image: '/bklyn-thread/images/products/tshirt-white.svg' },
+    { id: 'hat', name: 'Baseball Cap', price: 22.99, image: '/bklyn-thread/images/products/baseball-cap.svg' },
+    { id: 'hoodie', name: 'Pullover Hoodie', price: 44.99, image: '/bklyn-thread/images/products/hoodie-gray.svg' },
+    { id: 'polo', name: 'Polo Shirt', price: 28.99, image: '/bklyn-thread/images/products/polo-navy.svg' }
   ]
 
   const calculatePrice = () => {
