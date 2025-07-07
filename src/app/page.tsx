@@ -43,12 +43,12 @@ export default function Home() {
             Professional quality, competitive pricing, and fast turnaround.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/customize" className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2">
-              <span>Start Designing</span>
+            <Link href="/demo" className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2">
+              <span>Try Interactive Demo</span>
               <ArrowRight size={20} />
             </Link>
-            <Link href="/faq" className="btn-secondary text-lg px-8 py-4">
-              Learn More
+            <Link href="/customize" className="btn-secondary text-lg px-8 py-4">
+              Start Designing
             </Link>
           </div>
         </div>
