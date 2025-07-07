@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Upload, Type } from 'lucide-react'
 import { EMBROIDERY_PLACEMENTS, THREAD_COLORS, FONTS, LOGO_SIZES, CartItem } from '@/lib/types'
 
@@ -11,29 +11,24 @@ interface CustomizationPanelProps {
 
 export default function CustomizationPanel({ item, onItemChange }: CustomizationPanelProps) {
   const [designType, setDesignType] = useState<'text' | 'upload'>('text')
-  const [embroideryText, setEmbroideryText] = useState('')
   const [selectedFont, setSelectedFont] = useState('Arial')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
-  const [logoSize, setLogoSize] = useState('Medium (3")')
-
-  // Sync state with item changes
-  useEffect(() => {
-    setEmbroideryText(item.embroideryText || '')
-    setLogoSize(item.logoSize || 'Medium (3")')
-    if (item.embroideryText) {
-      setDesignType('text')
-    } else if (item.embroideryDesign) {
-      setDesignType('upload')
-    }
-  }, [item.embroideryText, item.logoSize, item.embroideryDesign])
 
   const handleDesignTypeChange = (type: 'text' | 'upload') => {
     setDesignType(type)
-    onItemChange({
-      ...item,
-      embroideryText: type === 'text' ? embroideryText : undefined,
-      embroideryDesign: type === 'upload' ? (uploadedFile ? uploadedFile.name : null) : null,
-    })
+    if (type === 'text') {
+      onItemChange({
+        ...item,
+        embroideryText: item.embroideryText || '',
+        embroideryDesign: null,
+      })
+    } else {
+      onItemChange({
+        ...item,
+        embroideryText: '',
+        embroideryDesign: uploadedFile ? uploadedFile.name : null,
+      })
+    }
   }
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +43,6 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
   }
 
   const handleLogoSizeChange = (size: string) => {
-    setLogoSize(size)
     onItemChange({
       ...item,
       logoSize: size,
@@ -56,7 +50,6 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
   }
 
   const handleTextChange = (text: string) => {
-    setEmbroideryText(text)
     onItemChange({
       ...item,
       embroideryText: text,
@@ -131,7 +124,7 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
           <label className="form-label">Embroidery Text</label>
           <input
             type="text"
-            value={embroideryText}
+            value={item.embroideryText || ''}
             onChange={(e) => handleTextChange(e.target.value)}
             placeholder="Enter text to embroider..."
             className="form-input"
@@ -198,7 +191,7 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
                     key={size}
                     onClick={() => handleLogoSizeChange(size)}
                     className={`px-4 py-3 min-h-[44px] rounded-md border text-sm md:text-base transition-all font-medium ${
-                      logoSize === size
+                      item.logoSize === size
                         ? 'border-blue-500 bg-blue-50 text-blue-700'
                         : 'border-gray-300 hover:border-gray-400'
                     }`}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useCallback } from 'react'
 import { CartItem } from '@/lib/types'
 import { formatPrice } from '@/lib/stripe'
 
@@ -11,7 +11,7 @@ interface PricingDisplayProps {
 }
 
 export default function PricingDisplay({ item, onAddToCart, onItemChange }: PricingDisplayProps) {
-  const calculatePricing = () => {
+  const calculatePricing = useCallback(() => {
     const basePrice = item.pricePerItem || 0
     const quantity = item.quantity || 1
     
@@ -65,19 +65,29 @@ export default function PricingDisplay({ item, onAddToCart, onItemChange }: Pric
       itemTotal,
       finalTotal: subtotal
     }
-  }
+  }, [item.pricePerItem, item.quantity, item.embroideryText, item.embroideryDesign, item.logoSize, item.threadColors, item.size])
 
-  // Update pricing when relevant data changes
+  // Update pricing when relevant data changes - but avoid circular updates
   useEffect(() => {
     const pricing = calculatePricing()
-    if (onItemChange && (item.pricePerItem !== pricing.itemTotal || item.totalPrice !== pricing.finalTotal)) {
-      onItemChange({
-        ...item,
-        pricePerItem: pricing.itemTotal,
-        totalPrice: pricing.finalTotal
-      })
+    const newPricePerItem = pricing.itemTotal
+    const newTotalPrice = pricing.finalTotal
+    
+    // Only update if prices actually changed to avoid infinite loops
+    if (onItemChange && 
+        (Math.abs((item.pricePerItem || 0) - newPricePerItem) > 0.01 || 
+         Math.abs((item.totalPrice || 0) - newTotalPrice) > 0.01)) {
+      
+      // Use setTimeout to break out of the current render cycle
+      setTimeout(() => {
+        onItemChange({
+          ...item,
+          pricePerItem: newPricePerItem,
+          totalPrice: newTotalPrice
+        })
+      }, 0)
     }
-  }, [item.embroideryText, item.embroideryDesign, item.logoSize, item.threadColors, item.size, item.quantity, item.pricePerItem, onItemChange])
+  }, [calculatePricing, item, onItemChange])
 
   const pricing = calculatePricing()
   const isComplete = item.productId && item.size && item.color && (item.embroideryText || item.embroideryDesign)
