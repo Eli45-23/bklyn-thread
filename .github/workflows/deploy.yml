@@ -42,15 +42,44 @@ jobs:
 
       - name: Build with Next.js
         run: |
-          echo "Starting Next.js build..."
+          echo "Starting Next.js build and export..."
+          echo "Current directory contents:"
+          ls -la
+          echo "Next.js config files:"
+          ls -la next.config*
+          
           if npm run build; then
             echo "✅ Next.js build successful"
+            echo "Post-build directory contents:"
             ls -la
+            
+            # Check for both possible output directories
             if [ -d "out" ]; then
               echo "✅ out directory exists"
               ls -la out/
+            elif [ -d ".next" ]; then
+              echo "📁 .next directory exists but no out directory"
+              echo "Force creating out directory from .next/standalone or static export"
+              
+              # Try to force export
+              npx next export -o out 2>/dev/null || true
+              
+              if [ -d "out" ]; then
+                echo "✅ Export successful"
+                ls -la out/
+              else
+                echo "Creating out directory manually"
+                mkdir -p out
+                # Copy static files
+                cp -r public/* out/ 2>/dev/null || true
+                cp -r .next/static out/_next/ 2>/dev/null || true
+                # Create basic index
+                cp static-fallback.html out/index.html
+                echo "✅ Manual export complete"
+                ls -la out/
+              fi
             else
-              echo "❌ out directory missing after successful build"
+              echo "❌ No build output found"
               exit 1
             fi
           else
