@@ -269,7 +269,7 @@ export default function DemoPage() {
                     </button>
                   </div>
                   <div className="grid grid-cols-4 gap-2">
-                    {[1, 5, 10, 25, 50, 100].map((qty) => (
+                    {[1, 5, 12, 24, 50, 100].map((qty) => (
                       <button
                         key={qty}
                         onClick={() => setDemoData({...demoData, quantity: qty})}
@@ -279,22 +279,28 @@ export default function DemoPage() {
                       </button>
                     ))}
                   </div>
-                  {demoData.quantity >= 50 && (
+                  {demoData.quantity >= 100 && (
+                    <div className="p-3 bg-green-50 rounded-lg border border-green-200">
+                      <p className="text-green-700 text-sm font-medium">🎉 20% Volume Discount Applied!</p>
+                      <p className="text-green-600 text-xs">Maximum volume discount achieved!</p>
+                    </div>
+                  )}
+                  {demoData.quantity >= 50 && demoData.quantity < 100 && (
                     <div className="p-3 bg-green-50 rounded-lg border border-green-200">
                       <p className="text-green-700 text-sm font-medium">🎉 15% Volume Discount Applied!</p>
-                      <p className="text-green-600 text-xs">Orders 50+ units save significantly</p>
+                      <p className="text-green-600 text-xs">Order 50 more for 20% discount</p>
                     </div>
                   )}
-                  {demoData.quantity >= 25 && demoData.quantity < 50 && (
+                  {demoData.quantity >= 24 && demoData.quantity < 50 && (
                     <div className="p-3 bg-green-50 rounded-lg border border-green-200">
                       <p className="text-green-700 text-sm font-medium">🎉 10% Volume Discount Applied!</p>
-                      <p className="text-green-600 text-xs">Order 25 more for additional savings</p>
+                      <p className="text-green-600 text-xs">Order 26 more for 15% discount</p>
                     </div>
                   )}
-                  {demoData.quantity >= 10 && demoData.quantity < 25 && (
+                  {demoData.quantity >= 12 && demoData.quantity < 24 && (
                     <div className="p-3 bg-green-50 rounded-lg border border-green-200">
                       <p className="text-green-700 text-sm font-medium">🎉 5% Volume Discount Applied!</p>
-                      <p className="text-green-600 text-xs">Order 15 more for 10% discount</p>
+                      <p className="text-green-600 text-xs">Order 12 more for 10% discount</p>
                     </div>
                   )}
                   <button onClick={nextStep} className="btn-primary">
@@ -422,10 +428,10 @@ export default function DemoPage() {
                         <span>+${(demoData.design === 'logo' ? 12.00 : 8.00).toFixed(2)} × {demoData.quantity}</span>
                       </div>
                     )}
-                    {demoData.quantity >= 10 && (
+                    {demoData.quantity >= 12 && (
                       <div className="flex justify-between text-sm text-green-600">
                         <span>Volume Discount:</span>
-                        <span>-{demoData.quantity >= 50 ? '15' : demoData.quantity >= 25 ? '10' : '5'}%</span>
+                        <span>-{demoData.quantity >= 100 ? '20' : demoData.quantity >= 50 ? '15' : demoData.quantity >= 24 ? '10' : '5'}%</span>
                       </div>
                     )}
                     <div className="flex justify-between font-semibold text-lg border-t pt-2">
