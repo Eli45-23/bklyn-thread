@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Upload, Type } from 'lucide-react'
 import { EMBROIDERY_PLACEMENTS, THREAD_COLORS, FONTS, LOGO_SIZES, CartItem } from '@/lib/types'
 
@@ -11,10 +11,21 @@ interface CustomizationPanelProps {
 
 export default function CustomizationPanel({ item, onItemChange }: CustomizationPanelProps) {
   const [designType, setDesignType] = useState<'text' | 'upload'>('text')
-  const [embroideryText, setEmbroideryText] = useState(item.embroideryText || '')
+  const [embroideryText, setEmbroideryText] = useState('')
   const [selectedFont, setSelectedFont] = useState('Arial')
   const [uploadedFile, setUploadedFile] = useState<File | null>(null)
-  const [logoSize, setLogoSize] = useState(item.logoSize || 'Medium (3")')
+  const [logoSize, setLogoSize] = useState('Medium (3")')
+
+  // Sync state with item changes
+  useEffect(() => {
+    setEmbroideryText(item.embroideryText || '')
+    setLogoSize(item.logoSize || 'Medium (3")')
+    if (item.embroideryText) {
+      setDesignType('text')
+    } else if (item.embroideryDesign) {
+      setDesignType('upload')
+    }
+  }, [item.embroideryText, item.logoSize, item.embroideryDesign])
 
   const handleDesignTypeChange = (type: 'text' | 'upload') => {
     setDesignType(type)

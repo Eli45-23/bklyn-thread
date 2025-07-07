@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { CartItem } from '@/lib/types'
 import { formatPrice } from '@/lib/stripe'
 
@@ -52,17 +53,6 @@ export default function PricingDisplay({ item, onAddToCart, onItemChange }: Pric
     const discountAmount = itemTotal * quantity * discount
     const subtotal = itemTotal * quantity - discountAmount
     
-    // Update the item's pricing
-    const updatedItem = {
-      ...item,
-      pricePerItem: itemTotal,
-      totalPrice: subtotal
-    }
-    
-    if (JSON.stringify(updatedItem) !== JSON.stringify(item) && onItemChange) {
-      onItemChange(updatedItem)
-    }
-    
     return {
       basePrice: basePrice * quantity,
       embroideryPrice: embroideryPrice * quantity,
@@ -71,9 +61,23 @@ export default function PricingDisplay({ item, onAddToCart, onItemChange }: Pric
       sizePrice: sizePrice * quantity,
       subtotal: itemTotal * quantity,
       discount: discountAmount,
-      total: subtotal
+      total: subtotal,
+      itemTotal,
+      finalTotal: subtotal
     }
   }
+
+  // Update pricing when relevant data changes
+  useEffect(() => {
+    const pricing = calculatePricing()
+    if (onItemChange && (item.pricePerItem !== pricing.itemTotal || item.totalPrice !== pricing.finalTotal)) {
+      onItemChange({
+        ...item,
+        pricePerItem: pricing.itemTotal,
+        totalPrice: pricing.finalTotal
+      })
+    }
+  }, [item.embroideryText, item.embroideryDesign, item.logoSize, item.threadColors, item.size, item.quantity, item.pricePerItem, onItemChange])
 
   const pricing = calculatePricing()
   const isComplete = item.productId && item.size && item.color && (item.embroideryText || item.embroideryDesign)

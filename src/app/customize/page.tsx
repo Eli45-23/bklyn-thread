@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import ProductSelector from '@/components/ProductSelector'
 import CustomizationPanel from '@/components/CustomizationPanel'
 import PricingDisplay from '@/components/PricingDisplay'
@@ -28,6 +28,10 @@ export default function CustomizePage() {
   })
 
   const [showSuccess, setShowSuccess] = useState(false)
+
+  const handleItemChange = useCallback((updatedItem: Partial<CartItem>) => {
+    setCurrentItem(updatedItem)
+  }, [])
 
   const handleAddToCart = () => {
     if (currentItem.productId && currentItem.size && currentItem.color && 
@@ -100,12 +104,12 @@ export default function CustomizePage() {
           <div className="lg:col-span-2 space-y-6">
             <ProductSelector
               selectedProduct={currentItem}
-              onProductChange={setCurrentItem}
+              onProductChange={handleItemChange}
             />
             
             <CustomizationPanel
               item={currentItem}
-              onItemChange={setCurrentItem}
+              onItemChange={handleItemChange}
             />
           </div>
 
@@ -116,7 +120,7 @@ export default function CustomizePage() {
             <PricingDisplay
               item={currentItem}
               onAddToCart={handleAddToCart}
-              onItemChange={setCurrentItem}
+              onItemChange={handleItemChange}
             />
           </div>
         </div>
