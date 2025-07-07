@@ -1,19 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { SIZES, COLORS, CartItem } from '@/lib/types'
+import { CartItem } from '@/lib/types'
+import { products } from '@/data/products'
 
 interface ProductSelectorProps {
   selectedProduct: Partial<CartItem>
   onProductChange: (product: Partial<CartItem>) => void
 }
 
-const products = [
-  { id: '1', name: 'Premium T-Shirt', type: 'shirt', basePrice: 18.99, image: '/bklyn-thread/images/products/tshirt-premium-white.jpg' },
-  { id: '2', name: 'Baseball Cap', type: 'hat', basePrice: 22.99, image: '/bklyn-thread/images/products/baseball-cap-navy.jpg' },
-  { id: '3', name: 'Pullover Hoodie', type: 'hoodie', basePrice: 44.99, image: '/bklyn-thread/images/products/hoodie-charcoal.jpg' },
-  { id: '4', name: 'Polo Shirt', type: 'polo', basePrice: 28.99, image: '/bklyn-thread/images/products/polo-navy.jpg' },
-]
+// Products are now imported from the data file
 
 export default function ProductSelector({ selectedProduct, onProductChange }: ProductSelectorProps) {
   const [selectedProductData, setSelectedProductData] = useState(products[0])
@@ -55,7 +51,7 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
     })
   }
 
-  const availableSizes = SIZES[selectedProductData.type.toUpperCase() as keyof typeof SIZES] || []
+  const availableSizes = selectedProductData.sizes || []
 
   return (
     <div className="card">
@@ -75,8 +71,8 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
                 : 'border-gray-200 hover:border-gray-300'
             }`}
           >
-            <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2">
-              <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+            <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2 overflow-hidden">
+              <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded" />
             </div>
             <h3 className="font-medium text-sm text-gray-900">
               {product.name}
@@ -114,8 +110,8 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
       {selectedProduct.productId && (
         <div className="mb-6">
           <label className="form-label">Color</label>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
-            {COLORS.map((color) => (
+          <div className="grid grid-cols-3 md:grid-cols-4 gap-3">
+            {selectedProductData.colors.map((color) => (
               <button
                 key={color}
                 onClick={() => handleColorChange(color)}

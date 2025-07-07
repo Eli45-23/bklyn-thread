@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { ArrowRight, Star, Truck, Clock, Shield } from 'lucide-react'
+import { products } from '@/data/products'
 
 export default function Home() {
   return (
@@ -39,8 +40,8 @@ export default function Home() {
             BKLYN Thread Custom Embroidery
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Brooklyn&apos;s premier custom embroidery service. Create stunning embroidered apparel with our easy-to-use design tool. 
-            Professional quality, competitive pricing, and fast turnaround.
+            Brooklyn&apos;s premier custom embroidery service. Professional-grade embroidery for businesses, teams, and events. 
+            <span className="font-semibold text-blue-700">5-7 day turnaround</span> • <span className="font-semibold text-green-700">Volume discounts up to 20%</span> • <span className="font-semibold text-purple-700">100% satisfaction guaranteed</span>
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/demo" className="btn-primary text-lg px-8 py-4 inline-flex items-center space-x-2">
@@ -105,27 +106,31 @@ export default function Home() {
             Popular Products
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
-            {[
-              { name: 'Premium T-Shirts', price: '$18.99', embroidery: '$8.00', image: '/bklyn-thread/images/products/tshirt-premium-white.jpg' },
-              { name: 'Baseball Caps', price: '$22.99', embroidery: '$12.00', image: '/bklyn-thread/images/products/baseball-cap-navy.jpg' },
-              { name: 'Pullover Hoodies', price: '$44.99', embroidery: '$15.00', image: '/bklyn-thread/images/products/hoodie-charcoal.jpg' },
-              { name: 'Polo Shirts', price: '$28.99', embroidery: '$10.00', image: '/bklyn-thread/images/products/polo-navy.jpg' }
-            ].map((product, index) => (
-              <div key={index} className="product-card overflow-hidden">
-                <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
-                  <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+            {products.map((product) => (
+              <Link key={product.id} href="/customize" className="product-card overflow-hidden group hover:scale-105 transition-all duration-300">
+                <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4 overflow-hidden">
+                  <img 
+                    src={product.image} 
+                    alt={product.name} 
+                    className="w-full h-full object-cover rounded-lg shadow-sm group-hover:shadow-lg transition-shadow duration-300" 
+                  />
                 </div>
                 <div className="p-4">
-                  <h3 className="font-bold text-gray-900 mb-2">{product.name}</h3>
+                  <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                    {product.name}
+                  </h3>
                   <div className="space-y-1">
-                    <p className="text-gray-600">Base: <span className="font-semibold">{product.price}</span></p>
-                    <p className="text-blue-600 text-sm">+ Embroidery: <span className="font-semibold">{product.embroidery}</span></p>
+                    <p className="text-gray-600">Base: <span className="font-semibold">${product.basePrice.toFixed(2)}</span></p>
+                    <p className="text-blue-600 text-sm">+ Embroidery from <span className="font-semibold">$8.00</span></p>
                     <div className="pricing-highlight mt-2">
-                      Volume discounts available
+                      {product.bulkPricing.length > 0 && `Up to ${Math.max(...product.bulkPricing.map(p => p.discount * 100))}% off bulk orders`}
+                    </div>
+                    <div className="text-xs text-gray-500 mt-1">
+                      {product.colors.length} colors • {product.sizes.length} sizes
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

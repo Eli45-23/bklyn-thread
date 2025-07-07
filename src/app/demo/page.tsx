@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ArrowLeft, Star, Clock, Shield, ShoppingCart, CheckCircle } from 'lucide-react'
+import { products } from '@/data/products'
 
 export default function DemoPage() {
   const [step, setStep] = useState(1)
@@ -16,15 +17,18 @@ export default function DemoPage() {
     price: 0
   })
 
-  const products = [
-    { id: 'shirt', name: 'Premium T-Shirt', price: 18.99, image: '/bklyn-thread/images/products/tshirt-premium-white.jpg' },
-    { id: 'hat', name: 'Baseball Cap', price: 22.99, image: '/bklyn-thread/images/products/baseball-cap-navy.jpg' },
-    { id: 'hoodie', name: 'Pullover Hoodie', price: 44.99, image: '/bklyn-thread/images/products/hoodie-charcoal.jpg' },
-    { id: 'polo', name: 'Polo Shirt', price: 28.99, image: '/bklyn-thread/images/products/polo-navy.jpg' }
-  ]
+  const demoProducts = products.map(p => ({
+    id: p.id,
+    name: p.shortName,
+    price: p.basePrice,
+    image: p.image,
+    colors: p.colors,
+    sizes: p.sizes,
+    description: p.description
+  }))
 
   const calculatePrice = () => {
-    const product = products.find(p => p.id === demoData.product)
+    const product = demoProducts.find(p => p.id === demoData.product)
     if (!product) return 0
     
     let itemPrice = product.price
@@ -35,10 +39,17 @@ export default function DemoPage() {
     
     let total = itemPrice * demoData.quantity
     
-    // Volume discounts
-    if (demoData.quantity >= 50) total *= 0.85 // 15% discount
-    else if (demoData.quantity >= 25) total *= 0.90 // 10% discount  
-    else if (demoData.quantity >= 10) total *= 0.95 // 5% discount
+    // Volume discounts based on actual product bulk pricing
+    const productData = products.find(p => p.id === demoData.product)
+    if (productData) {
+      const applicableDiscount = productData.bulkPricing
+        .filter(pricing => demoData.quantity >= pricing.quantity)
+        .reduce((max, current) => current.discount > max ? current.discount : max, 0)
+      
+      if (applicableDiscount > 0) {
+        total *= (1 - applicableDiscount)
+      }
+    }
     
     return total
   }
@@ -116,20 +127,21 @@ export default function DemoPage() {
               <div className="card">
                 <h2 className="text-xl font-semibold mb-4">Choose Your Product</h2>
                 <div className="grid grid-cols-2 gap-4">
-                  {products.map((product) => (
+                  {demoProducts.map((product) => (
                     <button
                       key={product.id}
                       onClick={() => {
                         setDemoData({...demoData, product: product.id})
                         nextStep()
                       }}
-                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all"
+                      className="p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all hover:shadow-md"
                     >
-                      <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2">
-                        <img src={product.image} alt={product.name} className="w-full h-full object-contain" />
+                      <div className="aspect-square bg-gray-50 rounded-lg mb-2 flex items-center justify-center p-2 overflow-hidden">
+                        <img src={product.image} alt={product.name} className="w-full h-full object-cover rounded" />
                       </div>
-                      <h3 className="font-medium">{product.name}</h3>
-                      <p className="text-blue-600">${product.price}</p>
+                      <h3 className="font-medium text-gray-900">{product.name}</h3>
+                      <p className="text-blue-600 font-semibold">${product.price.toFixed(2)}</p>
+                      <p className="text-xs text-gray-500 mt-1">{product.colors.length} colors available</p>
                     </button>
                   ))}
                 </div>
@@ -144,33 +156,33 @@ export default function DemoPage() {
                   <div>
                     <label className="form-label">Size</label>
                     <div className="flex flex-wrap gap-2">
-                      {['S', 'M', 'L', 'XL', '2XL'].map((size) => (
+                      {demoProducts.find(p => p.id === demoData.product)?.sizes.map((size) => (
                         <button
                           key={size}
                           onClick={() => setDemoData({...demoData, size})}
-                          className={`px-4 py-2 border rounded-md ${
-                            demoData.size === size ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+                          className={`px-4 py-2 border rounded-md font-medium transition-all ${
+                            demoData.size === size ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-300 hover:border-gray-400'
                           }`}
                         >
                           {size}
                         </button>
-                      ))}
+                      )) || []}
                     </div>
                   </div>
                   <div>
                     <label className="form-label">Color</label>
-                    <div className="grid grid-cols-4 gap-2">
-                      {['White', 'Black', 'Navy', 'Red', 'Royal Blue', 'Forest Green', 'Gray', 'Charcoal'].map((color) => (
+                    <div className="grid grid-cols-3 gap-2">
+                      {demoProducts.find(p => p.id === demoData.product)?.colors.map((color) => (
                         <button
                           key={color}
                           onClick={() => setDemoData({...demoData, color})}
-                          className={`px-3 py-2 border rounded-md text-sm ${
-                            demoData.color === color ? 'border-blue-500 bg-blue-50' : 'border-gray-300'
+                          className={`px-3 py-2 border rounded-md text-sm font-medium transition-all ${
+                            demoData.color === color ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-300 hover:border-gray-400'
                           }`}
                         >
                           {color}
                         </button>
-                      ))}
+                      )) || []}
                     </div>
                   </div>
                   <button
@@ -331,11 +343,11 @@ export default function DemoPage() {
             {demoData.product && (
               <div className="card">
                 <h3 className="text-lg font-semibold mb-4">Product Preview</h3>
-                <div className="aspect-square bg-gray-50 rounded-lg flex items-center justify-center p-4 mb-4">
+                <div className="aspect-square bg-gray-50 rounded-lg flex items-center justify-center p-4 mb-4 overflow-hidden">
                   <img 
-                    src={products.find(p => p.id === demoData.product)?.image} 
-                    alt={products.find(p => p.id === demoData.product)?.name}
-                    className="w-full h-full object-contain" 
+                    src={demoProducts.find(p => p.id === demoData.product)?.image} 
+                    alt={demoProducts.find(p => p.id === demoData.product)?.name}
+                    className="w-full h-full object-cover rounded-lg shadow-sm" 
                   />
                 </div>
                 <div className="space-y-2 text-sm">
@@ -376,7 +388,7 @@ export default function DemoPage() {
               <div className="space-y-2 text-sm">
                 <div className="flex justify-between">
                   <span>Product:</span>
-                  <span>{demoData.product ? products.find(p => p.id === demoData.product)?.name : 'Not selected'}</span>
+                  <span>{demoData.product ? demoProducts.find(p => p.id === demoData.product)?.name : 'Not selected'}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Size:</span>
@@ -402,7 +414,7 @@ export default function DemoPage() {
                   <div className="border-t pt-2 mt-2 space-y-1">
                     <div className="flex justify-between text-sm">
                       <span>Base Price:</span>
-                      <span>${(products.find(p => p.id === demoData.product)?.price || 0).toFixed(2)} × {demoData.quantity}</span>
+                      <span>${(demoProducts.find(p => p.id === demoData.product)?.price || 0).toFixed(2)} × {demoData.quantity}</span>
                     </div>
                     {demoData.design && (
                       <div className="flex justify-between text-sm">
