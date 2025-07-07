@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import { CheckCircle, Clock, Truck, Mail } from 'lucide-react'
 import Header from '@/components/Header'

@@ -6,9 +6,10 @@ import { formatPrice } from '@/lib/stripe'
 interface PricingDisplayProps {
   item: Partial<CartItem>
   onAddToCart: () => void
+  onItemChange?: (item: Partial<CartItem>) => void
 }
 
-export default function PricingDisplay({ item, onAddToCart }: PricingDisplayProps) {
+export default function PricingDisplay({ item, onAddToCart, onItemChange }: PricingDisplayProps) {
   const calculatePricing = () => {
     const basePrice = item.pricePerItem || 0
     const quantity = item.quantity || 1
@@ -58,8 +59,8 @@ export default function PricingDisplay({ item, onAddToCart }: PricingDisplayProp
       totalPrice: subtotal
     }
     
-    if (JSON.stringify(updatedItem) !== JSON.stringify(item)) {
-      onItemChange && onItemChange(updatedItem)
+    if (JSON.stringify(updatedItem) !== JSON.stringify(item) && onItemChange) {
+      onItemChange(updatedItem)
     }
     
     return {

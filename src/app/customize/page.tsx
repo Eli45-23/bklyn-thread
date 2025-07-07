@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import ProductSelector from '@/components/ProductSelector'
 import CustomizationPanel from '@/components/CustomizationPanel'
 import PricingDisplay from '@/components/PricingDisplay'
@@ -11,7 +10,6 @@ import { CartItem } from '@/lib/types'
 import { useCart } from '@/contexts/CartContext'
 
 export default function CustomizePage() {
-  const router = useRouter()
   const { dispatch } = useCart()
   const [currentItem, setCurrentItem] = useState<Partial<CartItem>>({
     productId: '',
@@ -118,6 +116,7 @@ export default function CustomizePage() {
             <PricingDisplay
               item={currentItem}
               onAddToCart={handleAddToCart}
+              onItemChange={setCurrentItem}
             />
           </div>
         </div>

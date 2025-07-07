@@ -5,7 +5,7 @@ import { ShoppingCart } from 'lucide-react'
 import { useCart } from '@/contexts/CartContext'
 
 export default function Header() {
-  const { state, dispatch } = useCart()
+  const { state } = useCart()
   
   const totalItems = state.items.reduce((sum, item) => sum + item.quantity, 0)
 
