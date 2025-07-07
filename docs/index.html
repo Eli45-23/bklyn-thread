@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BKLYN Thread - Custom Embroidery Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-blue-50 to-white">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">BT</span>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900">BKLYN Thread</h1>
+                </div>
+                <div class="text-sm text-blue-600 font-medium">
+                    Live Demo
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="py-20 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-bold text-gray-900 mb-6">
+                BKLYN Thread Custom Embroidery
+            </h1>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Brooklyn's premier custom embroidery service. Experience our automated ordering system with real-time pricing and professional results.
+            </p>
+            <button onclick="startDemo()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-8 rounded-lg text-lg transition-colors duration-200">
+                🎯 Start Interactive Demo
+            </button>
+        </div>
+    </section>
+
+    <!-- Demo Interface -->
+    <div id="demo-container" class="hidden">
+        <div class="max-w-6xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Main Demo Area -->
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h2 class="text-2xl font-semibold mb-6">Complete Your Order</h2>
+                        
+                        <!-- Product Selection -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-medium mb-4">1. Choose Your Product</h3>
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <button onclick="selectProduct('shirt', 'Premium T-Shirt', 15.99)" class="product-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                                    <div class="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
+                                        <span class="text-xs text-gray-500">SHIRT</span>
+                                    </div>
+                                    <div class="text-sm font-medium">T-Shirt</div>
+                                    <div class="text-blue-600">$15.99</div>
+                                </button>
+                                <button onclick="selectProduct('hat', 'Baseball Cap', 19.99)" class="product-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                                    <div class="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
+                                        <span class="text-xs text-gray-500">HAT</span>
+                                    </div>
+                                    <div class="text-sm font-medium">Baseball Cap</div>
+                                    <div class="text-blue-600">$19.99</div>
+                                </button>
+                                <button onclick="selectProduct('hoodie', 'Pullover Hoodie', 39.99)" class="product-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                                    <div class="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
+                                        <span class="text-xs text-gray-500">HOODIE</span>
+                                    </div>
+                                    <div class="text-sm font-medium">Hoodie</div>
+                                    <div class="text-blue-600">$39.99</div>
+                                </button>
+                                <button onclick="selectProduct('polo', 'Polo Shirt', 24.99)" class="product-btn p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 transition-all">
+                                    <div class="aspect-square bg-gray-100 rounded-lg mb-2 flex items-center justify-center">
+                                        <span class="text-xs text-gray-500">POLO</span>
+                                    </div>
+                                    <div class="text-sm font-medium">Polo Shirt</div>
+                                    <div class="text-blue-600">$24.99</div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Size & Color -->
+                        <div id="size-color-section" class="mb-8 hidden">
+                            <h3 class="text-lg font-medium mb-4">2. Select Size & Color</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Size</label>
+                                    <div class="flex flex-wrap gap-2">
+                                        <button onclick="selectSize('S')" class="size-btn px-4 py-2 border border-gray-300 rounded-md hover:border-blue-500">S</button>
+                                        <button onclick="selectSize('M')" class="size-btn px-4 py-2 border border-gray-300 rounded-md hover:border-blue-500">M</button>
+                                        <button onclick="selectSize('L')" class="size-btn px-4 py-2 border border-gray-300 rounded-md hover:border-blue-500">L</button>
+                                        <button onclick="selectSize('XL')" class="size-btn px-4 py-2 border border-gray-300 rounded-md hover:border-blue-500">XL</button>
+                                        <button onclick="selectSize('2XL')" class="size-btn px-4 py-2 border border-gray-300 rounded-md hover:border-blue-500">2XL</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Color</label>
+                                    <div class="grid grid-cols-4 gap-2">
+                                        <button onclick="selectColor('White')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">White</button>
+                                        <button onclick="selectColor('Black')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Black</button>
+                                        <button onclick="selectColor('Navy')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Navy</button>
+                                        <button onclick="selectColor('Red')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Red</button>
+                                        <button onclick="selectColor('Royal Blue')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Royal Blue</button>
+                                        <button onclick="selectColor('Forest Green')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Forest Green</button>
+                                        <button onclick="selectColor('Gray')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Gray</button>
+                                        <button onclick="selectColor('Purple')" class="color-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">Purple</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Design Options -->
+                        <div id="design-section" class="mb-8 hidden">
+                            <h3 class="text-lg font-medium mb-4">3. Choose Your Design</h3>
+                            <div class="space-y-3">
+                                <button onclick="selectDesign('text')" class="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 text-left transition-all">
+                                    <h4 class="font-medium mb-1">Custom Text</h4>
+                                    <p class="text-gray-600 text-sm">Add custom text embroidery (+$3.00)</p>
+                                </button>
+                                <button onclick="selectDesign('logo')" class="w-full p-4 border-2 border-gray-200 rounded-lg hover:border-blue-500 text-left transition-all">
+                                    <h4 class="font-medium mb-1">Upload Logo</h4>
+                                    <p class="text-gray-600 text-sm">Upload your logo design (+$5.00)</p>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quantity -->
+                        <div id="quantity-section" class="mb-8 hidden">
+                            <h3 class="text-lg font-medium mb-4">4. Select Quantity</h3>
+                            <div class="flex items-center space-x-4 mb-4">
+                                <button onclick="changeQuantity(-1)" class="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">-</button>
+                                <span id="quantity-display" class="text-2xl font-bold w-16 text-center">1</span>
+                                <button onclick="changeQuantity(1)" class="px-3 py-2 border border-gray-300 rounded-md hover:bg-gray-50">+</button>
+                            </div>
+                            <div class="grid grid-cols-6 gap-2">
+                                <button onclick="setQuantity(1)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">1</button>
+                                <button onclick="setQuantity(5)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">5</button>
+                                <button onclick="setQuantity(10)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">10</button>
+                                <button onclick="setQuantity(25)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">25</button>
+                                <button onclick="setQuantity(50)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">50</button>
+                                <button onclick="setQuantity(100)" class="qty-btn px-3 py-2 border border-gray-300 rounded-md text-sm hover:border-blue-500">100</button>
+                            </div>
+                            <div id="discount-notice" class="hidden mt-4 p-3 bg-green-50 rounded-lg">
+                                <p class="text-green-700 text-sm">🎉 <span id="discount-text"></span> quantity discount applied!</p>
+                            </div>
+                        </div>
+
+                        <!-- Complete Order -->
+                        <div id="complete-section" class="hidden">
+                            <button onclick="completeOrder()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-4 px-6 rounded-lg text-lg transition-colors">
+                                Complete Order • $<span id="final-total">0.00</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">Order Summary</h3>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>Product:</span>
+                                <span id="summary-product">Not selected</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Size:</span>
+                                <span id="summary-size">Not selected</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Color:</span>
+                                <span id="summary-color">Not selected</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Design:</span>
+                                <span id="summary-design">Not selected</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Quantity:</span>
+                                <span id="summary-quantity">1</span>
+                            </div>
+                            <div class="border-t pt-2 mt-2">
+                                <div class="flex justify-between font-semibold text-lg">
+                                    <span>Total:</span>
+                                    <span id="summary-total">$0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <h3 class="text-lg font-semibold mb-4">Demo Features</h3>
+                        <div class="space-y-2 text-sm text-gray-600">
+                            <div class="flex items-center space-x-2">
+                                <span class="text-yellow-500">⭐</span>
+                                <span>Real-time pricing</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-green-500">⏰</span>
+                                <span>5-7 day production</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-blue-500">🛡️</span>
+                                <span>Quality guaranteed</span>
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <span class="text-purple-500">🛒</span>
+                                <span>Automated ordering</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-green-600 text-2xl">✅</span>
+                </div>
+                <h2 class="text-2xl font-semibold mb-4">Demo Complete!</h2>
+                <p class="text-gray-600 mb-6">
+                    You've experienced the full BKLYN Thread automated ordering process.
+                </p>
+                <div class="space-y-2 text-sm mb-6">
+                    <p>✅ Easy product selection</p>
+                    <p>✅ Real-time pricing calculations</p>
+                    <p>✅ Automated quantity discounts</p>
+                    <p>✅ Professional checkout experience</p>
+                </div>
+                <button onclick="restartDemo()" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-colors">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let order = {
+            product: null,
+            productName: '',
+            basePrice: 0,
+            size: '',
+            color: '',
+            design: '',
+            quantity: 1
+        };
+
+        function startDemo() {
+            document.querySelector('section').style.display = 'none';
+            document.getElementById('demo-container').classList.remove('hidden');
+        }
+
+        function selectProduct(id, name, price) {
+            order.product = id;
+            order.productName = name;
+            order.basePrice = price;
+            
+            // Update UI
+            document.querySelectorAll('.product-btn').forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+            event.target.closest('.product-btn').classList.add('border-blue-500', 'bg-blue-50');
+            
+            document.getElementById('summary-product').textContent = name;
+            document.getElementById('size-color-section').classList.remove('hidden');
+            
+            updateTotal();
+        }
+
+        function selectSize(size) {
+            order.size = size;
+            document.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+            event.target.classList.add('border-blue-500', 'bg-blue-50');
+            document.getElementById('summary-size').textContent = size;
+            checkSizeColor();
+        }
+
+        function selectColor(color) {
+            order.color = color;
+            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+            event.target.classList.add('border-blue-500', 'bg-blue-50');
+            document.getElementById('summary-color').textContent = color;
+            checkSizeColor();
+        }
+
+        function checkSizeColor() {
+            if (order.size && order.color) {
+                document.getElementById('design-section').classList.remove('hidden');
+            }
+        }
+
+        function selectDesign(type) {
+            order.design = type;
+            document.getElementById('summary-design').textContent = type === 'text' ? 'Custom Text (+$3)' : 'Logo Upload (+$5)';
+            document.getElementById('quantity-section').classList.remove('hidden');
+            updateTotal();
+        }
+
+        function changeQuantity(change) {
+            order.quantity = Math.max(1, order.quantity + change);
+            updateQuantityDisplay();
+        }
+
+        function setQuantity(qty) {
+            order.quantity = qty;
+            document.querySelectorAll('.qty-btn').forEach(btn => btn.classList.remove('border-blue-500', 'bg-blue-50'));
+            event.target.classList.add('border-blue-500', 'bg-blue-50');
+            updateQuantityDisplay();
+        }
+
+        function updateQuantityDisplay() {
+            document.getElementById('quantity-display').textContent = order.quantity;
+            document.getElementById('summary-quantity').textContent = order.quantity;
+            
+            // Show discount notice
+            const discountNotice = document.getElementById('discount-notice');
+            const discountText = document.getElementById('discount-text');
+            
+            if (order.quantity >= 100) {
+                discountNotice.classList.remove('hidden');
+                discountText.textContent = '20%';
+            } else if (order.quantity >= 50) {
+                discountNotice.classList.remove('hidden');
+                discountText.textContent = '15%';
+            } else if (order.quantity >= 25) {
+                discountNotice.classList.remove('hidden');
+                discountText.textContent = '10%';
+            } else if (order.quantity >= 10) {
+                discountNotice.classList.remove('hidden');
+                discountText.textContent = '5%';
+            } else {
+                discountNotice.classList.add('hidden');
+            }
+            
+            document.getElementById('complete-section').classList.remove('hidden');
+            updateTotal();
+        }
+
+        function updateTotal() {
+            let total = order.basePrice;
+            
+            // Add embroidery cost
+            if (order.design === 'text') total += 3;
+            if (order.design === 'logo') total += 5;
+            
+            // Calculate subtotal
+            let subtotal = total * order.quantity;
+            
+            // Apply quantity discounts
+            if (order.quantity >= 100) subtotal *= 0.8;
+            else if (order.quantity >= 50) subtotal *= 0.85;
+            else if (order.quantity >= 25) subtotal *= 0.9;
+            else if (order.quantity >= 10) subtotal *= 0.95;
+            
+            document.getElementById('summary-total').textContent = '$' + subtotal.toFixed(2);
+            document.getElementById('final-total').textContent = subtotal.toFixed(2);
+        }
+
+        function completeOrder() {
+            document.getElementById('success-modal').classList.remove('hidden');
+        }
+
+        function restartDemo() {
+            document.getElementById('success-modal').classList.add('hidden');
+            document.getElementById('demo-container').classList.add('hidden');
+            document.querySelector('section').style.display = 'block';
+            
+            // Reset order
+            order = {
+                product: null,
+                productName: '',
+                basePrice: 0,
+                size: '',
+                color: '',
+                design: '',
+                quantity: 1
+            };
+            
+            // Reset UI
+            document.querySelectorAll('.hidden').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.border-blue-500').forEach(el => el.classList.remove('border-blue-500', 'bg-blue-50'));
+            
+            // Reset summary
+            document.getElementById('summary-product').textContent = 'Not selected';
+            document.getElementById('summary-size').textContent = 'Not selected';
+            document.getElementById('summary-color').textContent = 'Not selected';
+            document.getElementById('summary-design').textContent = 'Not selected';
+            document.getElementById('summary-quantity').textContent = '1';
+            document.getElementById('summary-total').textContent = '$0.00';
+            document.getElementById('quantity-display').textContent = '1';
+        }
+    </script>
+</body>
+</html>
