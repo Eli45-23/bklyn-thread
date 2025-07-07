@@ -106,10 +106,10 @@ export default function Home() {
           </h2>
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { name: 'Premium T-Shirts', price: '$18.99', embroidery: '$8.00', image: '/images/products/tshirt-white.svg' },
-              { name: 'Baseball Caps', price: '$22.99', embroidery: '$12.00', image: '/images/products/baseball-cap.svg' },
-              { name: 'Pullover Hoodies', price: '$44.99', embroidery: '$15.00', image: '/images/products/hoodie-gray.svg' },
-              { name: 'Polo Shirts', price: '$28.99', embroidery: '$10.00', image: '/images/products/polo-navy.svg' }
+              { name: 'Premium T-Shirts', price: '$18.99', embroidery: '$8.00', image: '/bklyn-thread/images/products/tshirt-white.svg' },
+              { name: 'Baseball Caps', price: '$22.99', embroidery: '$12.00', image: '/bklyn-thread/images/products/baseball-cap.svg' },
+              { name: 'Pullover Hoodies', price: '$44.99', embroidery: '$15.00', image: '/bklyn-thread/images/products/hoodie-gray.svg' },
+              { name: 'Polo Shirts', price: '$28.99', embroidery: '$10.00', image: '/bklyn-thread/images/products/polo-navy.svg' }
             ].map((product, index) => (
               <div key={index} className="product-card overflow-hidden">
                 <div className="aspect-square bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center p-4">
