@@ -88,21 +88,21 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
       {/* Design Type Selection */}
       <div className="mb-6">
         <label className="form-label">Design Type</label>
-        <div className="flex space-x-4">
+        <div className="flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => handleDesignTypeChange('text')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-all ${
+            className={`flex items-center justify-center space-x-2 px-6 py-3 min-h-[44px] rounded-lg border transition-all text-base font-medium ${
               designType === 'text'
                 ? 'border-blue-500 bg-blue-50 text-blue-700'
                 : 'border-gray-300 hover:border-gray-400'
             }`}
           >
-            <Type size={16} />
+            <Type size={20} />
             <span>Text</span>
           </button>
           <button
             onClick={() => handleDesignTypeChange('upload')}
-            className={`flex items-center space-x-2 px-4 py-2 rounded-lg border transition-all ${
+            className={`flex items-center justify-center space-x-2 px-6 py-3 min-h-[44px] rounded-lg border transition-all text-base font-medium ${
               designType === 'upload'
                 ? 'border-blue-500 bg-blue-50 text-blue-700'
                 : 'border-gray-300 hover:border-gray-400'
@@ -181,12 +181,12 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
           {uploadedFile && (
             <div className="mt-4">
               <label className="form-label">Logo Size</label>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-2 gap-3">
                 {LOGO_SIZES.map((size) => (
                   <button
                     key={size}
                     onClick={() => handleLogoSizeChange(size)}
-                    className={`px-3 py-2 rounded-md border text-sm transition-all ${
+                    className={`px-4 py-3 min-h-[44px] rounded-md border text-sm md:text-base transition-all font-medium ${
                       logoSize === size
                         ? 'border-blue-500 bg-blue-50 text-blue-700'
                         : 'border-gray-300 hover:border-gray-400'
@@ -224,12 +224,12 @@ export default function CustomizationPanel({ item, onItemChange }: Customization
       {/* Thread Colors */}
       <div className="mb-6">
         <label className="form-label">Thread Colors</label>
-        <div className="grid grid-cols-4 md:grid-cols-6 gap-2">
+        <div className="grid grid-cols-3 md:grid-cols-5 gap-3">
           {THREAD_COLORS.map((color) => (
             <button
               key={color}
               onClick={() => handleThreadColorChange(color)}
-              className={`p-2 rounded-md border text-xs transition-all ${
+              className={`p-3 min-h-[44px] rounded-md border text-xs md:text-sm transition-all font-medium ${
                 item.threadColors?.includes(color)
                   ? 'border-blue-500 bg-blue-50 text-blue-700'
                   : 'border-gray-300 hover:border-gray-400'

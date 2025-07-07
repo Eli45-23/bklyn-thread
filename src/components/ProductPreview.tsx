@@ -38,8 +38,8 @@ export default function ProductPreview({ item }: ProductPreviewProps) {
           <div className="relative w-full h-full">
             {/* Product silhouette */}
             <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-48 h-48 bg-gray-300 rounded-lg flex items-center justify-center">
-                <span className="text-gray-500 text-sm">
+              <div className="w-full max-w-48 aspect-square bg-gray-300 rounded-lg flex items-center justify-center mx-4">
+                <span className="text-gray-500 text-sm md:text-base font-medium">
                   {item.productType?.toUpperCase()}
                 </span>
               </div>

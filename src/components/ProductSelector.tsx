@@ -94,12 +94,12 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
       {selectedProduct.productId && (
         <div className="mb-6">
           <label className="form-label">Size</label>
-          <div className="flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-3">
             {availableSizes.map((size) => (
               <button
                 key={size}
                 onClick={() => handleSizeChange(size)}
-                className={`px-4 py-2 rounded-md border transition-all ${
+                className={`px-4 py-3 min-h-[44px] min-w-[44px] rounded-md border transition-all text-base font-medium ${
                   selectedProduct.size === size
                     ? 'border-blue-500 bg-blue-50 text-blue-700'
                     : 'border-gray-300 hover:border-gray-400'
@@ -116,12 +116,12 @@ export default function ProductSelector({ selectedProduct, onProductChange }: Pr
       {selectedProduct.productId && (
         <div className="mb-6">
           <label className="form-label">Color</label>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-3">
             {COLORS.map((color) => (
               <button
                 key={color}
                 onClick={() => handleColorChange(color)}
-                className={`p-2 rounded-md border text-sm transition-all ${
+                className={`p-3 min-h-[44px] rounded-md border text-sm md:text-base transition-all ${
                   selectedProduct.color === color
                     ? 'border-blue-500 bg-blue-50 text-blue-700'
                     : 'border-gray-300 hover:border-gray-400'
